@@ -42,7 +42,7 @@ $y={\theta_0}+{\theta_1}x => f(x,\theta) = x^T\theta$
 
 $∇_\theta L={\partial L\over{\partial e}}{\partial e\over{\partial \theta}}$
 
-其中${\partial L\over{\partial e}}=∇_e (e^Te)=2e^T$   ${\partial e\over{\partial \theta}}={\partial ({y-X\theta})\over{\partial \theta}}=-X$
+其中${\partial L\over{\partial e}}$ $=∇_e (e^Te)=2e^T$   ${\partial e\over{\partial \theta}}={\partial ({y-X\theta})\over{\partial \theta}}=-X$
 
 因为 $e^Te = e_1^2 + e_2^2 + ... + e_N^2$ 对$e$求偏导等于 $2e_1+2e_2 + ... + 2e_N = 2[e_1 \ e_2 \ ... \ e_N] = 2e^T$
 
