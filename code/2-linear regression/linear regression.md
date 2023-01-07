@@ -16,24 +16,9 @@ $y={\theta_0}+{\theta_1}x => f(x,\theta) = x^T\theta$
 
 (${\theta_0}$是偏置, ${\theta_1}$是权重向量, $x$是特征向量)
 
-$$
-x = \begin{bmatrix}
-1\\
-x_1\\
-x_2\\
-\end{bmatrix}
+![image.png](./assets/image.png)
 
-{\theta} =\begin{bmatrix}
-{\theta_0}\\
-{\theta_1}\\
-{\theta_2}\\
-\end{bmatrix}
 
-x^T =\begin{bmatrix}
-1&x_0&x_2\\
-\end{bmatrix}
-
-$$
 
 在这个回归任务中，找到“最佳拟合线”来**最小化预测误差**
 
@@ -41,42 +26,7 @@ $$
 
 此处
 
-$$
-X = \begin{bmatrix}
-x_1^T\\
-x_2^T\\
-...\\
-x_N^T\\
-\end{bmatrix}
-
-= \begin{bmatrix}
-1 \ x_{11} \ x_{12}\\
-1 \ x_{21} \ x_{22}\\
-...\\
-1 \ x_{N1} \ x_{N2}\\
-\end{bmatrix}
-, \ 
-\theta = \begin{bmatrix}
-\theta_0\\
-\theta_1\\
-\theta_2\\
-\end{bmatrix}
-, \ 
-y = \begin{bmatrix}
-y_1\\
-y_2\\
-...\\
-y_N
-\end{bmatrix}
-, \ 
-X\theta = \begin{bmatrix}
-\theta_0 + x_{11}\theta_1 + x_{12}\theta_2\\
-\theta_0 + x_{21}\theta_1 + x_{22}\theta_2\\
-...\\
-\theta_0 + x_{N1}\theta_1 + x_{N2}\theta_2\\
-\end{bmatrix}
-
-$$
+![image.png](./assets/1673130774579-image.png)
 
 单个样本的误差为 $|y_i-y_p|$
 
@@ -148,7 +98,6 @@ theta=invx.dot(xt).dot(y) # ((X.T@X)^-1)@X.T@y
 例如国家变量有三个分类：中国，美国和俄罗斯。
 
 则有三个虚拟变量来表示。
-
 
 虚拟变量陷阱值得是两个或两个以上变量相关联的情况。
 
