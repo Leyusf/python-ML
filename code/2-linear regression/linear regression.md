@@ -14,7 +14,7 @@
 
 $y={\theta_0}+{\theta_1}x => f(x,\theta) = x^T\theta$
 
-(${\theta_0}$是偏置, ${\theta_1}$是权重向量, $x$是特征向量)
+( ${\theta_0}$是偏置, ${\theta_1}$是权重向量, $x$是特征向量)
 
 ![image.png](./assets/image.png)
 
@@ -74,7 +74,7 @@ $\theta=(X^TX)^{-1}X^Ty$
 
 $AB=C \ => A^{-1}AB=A^{-1}C \ =>B=A^{-1}C$
 
-此时就可以计算出$\theta$向量
+此时就可以计算出 $\theta$ 向量
 
 代码为
 
