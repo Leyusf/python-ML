@@ -32,7 +32,7 @@ $y={\theta_0}+{\theta_1}x => f(x,\theta) = x^T\theta$
 
 所以损失函数是 $L({\theta};X,y)={1\over{N}}\sum^N_{i=1}(y_i-f(x_i,\theta))^2={1\over{N}}\sum^N_{i=1}(y_i-\theta^Tx_i)^2$
 
-其中$L$是误差的平方和，进一步变换 $L={1\over{N}}(y-X\theta)^T(y-X\theta)$
+其中 $L$ 是误差的平方和，进一步变换 $L={1\over{N}}(y-X\theta)^T(y-X\theta)$
 
 ## 找到最佳拟合方程
 
