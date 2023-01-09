@@ -14,8 +14,10 @@ Y = dataset.iloc[:, -1].values
 # 将类别数字化
 ct = ColumnTransformer([("State", OneHotEncoder(), [3])], remainder='passthrough')
 X = ct.fit_transform(X)
+
 # 舍弃一个虚拟变量，躲避虚拟变量陷阱
 X = X[:, 1:]
+print(X)
 
 X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.25, random_state=0)
 

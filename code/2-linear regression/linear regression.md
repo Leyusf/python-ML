@@ -18,8 +18,6 @@ $y={\theta_0}+{\theta_1}x => f(x,\theta) = x^T\theta$
 
 ![image.png](./assets/image.png)
 
-
-
 在这个回归任务中，找到“最佳拟合线”来**最小化预测误差**
 
 使用 $y_i$ 表示数据的实际值， $y_p$表示数据的预测值 ( $y_p=f(X,{\theta})$ )
