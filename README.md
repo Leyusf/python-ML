@@ -6,6 +6,7 @@
 
 [练习numpy的使用](/code/1-data%20preprocess/practice/p1.py)
 
+#### 2. 线性回归
 [线性回归](/code/2-linear%20regression/linear%20regression.md)
 
 [线性回归实现](/code/2-linear%20regression/impLR.py)
@@ -15,3 +16,6 @@
 [多元线性回归](/code/2-linear%20regression/practice/p1.py)
 
 [存在非数值的线性回归](/code/2-linear%20regression/practice/p2.py)
+
+#### 3. 梯度下降
+[梯度下降](/code/3-gradient%20descent/gradient%20descent.md)
