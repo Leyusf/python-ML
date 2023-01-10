@@ -13,7 +13,7 @@ class MyLinearRegressor:
         XT = data.T
         # 计算矩阵的逆
         # 注意numpy类型转换错误
-        invX = np.linalg.inv((XT @ data).astype(np.float64))
+        invX = np.linalg.pinv((XT @ data).astype(np.float64))
         # 计算权重
         self.theta = invX @ XT @ Y
 
