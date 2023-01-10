@@ -20,12 +20,14 @@ linearRegressor_GD = LR_GD(epochs=9000, rate=0.01)
 linearRegressor_GD.fit(X_train, Y_train)
 Y_Pred = linearRegressor_GD.predict(X_test)
 print(Y_Pred)
+print(np.sum(np.square(Y_Pred - Y_test)) / len(X_test))
 
 print("\nGD自适应学习率:")
 linearRegressor_GD = LR_GD(epochs=9000, rate=0.1, alr=True)
 linearRegressor_GD.fit(X_train, Y_train)
 Y_Pred = linearRegressor_GD.predict(X_test)
 print(Y_Pred)
+print(np.sum(np.square(Y_Pred - Y_test)) / len(X_test))
 
 X_train_2 = np.c_[np.ones(len(X_train)), X_train, X_train * X_train]
 X_test_2 = np.c_[np.ones(len(X_test)), X_test, X_test * X_test]
@@ -36,9 +38,13 @@ linearRegressor_GD = LR_GD(epochs=100000, rate=0.0004)
 linearRegressor_GD.fit(X_train_2, Y_train)
 Y_Pred = linearRegressor_GD.predict(X_test_2)
 print(Y_Pred)
+print(np.sum(np.square(Y_Pred - Y_test)) / len(X_test))
 
 print("\nGD自适应学习率:")
 linearRegressor_GD = LR_GD(epochs=100000, rate=0.001, alr=True)
 linearRegressor_GD.fit(X_train_2, Y_train)
 Y_Pred = linearRegressor_GD.predict(X_test_2)
 print(Y_Pred)
+print(np.sum(np.square(Y_Pred - Y_test)) / len(X_test))
+
+
