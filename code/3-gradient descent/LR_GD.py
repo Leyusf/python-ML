@@ -7,28 +7,79 @@ class LR_GD:
     # epochs 是最大训练轮数
     # rate 是学习率
     # e 是允许的误差
-    def __init__(self, epochs, rate=0.01, e=1e-7, alr=False, batch_size=0, ada=False):
+    # batch_size 是SDG的训练组的大小，默认使用全部即GD
+    # alg 是采用的算法，默认是基础训练算法，可以选择 自适应学习率(adaptive), AdaGrad(adagrad), RMSprop(rmsprop), AdaDelta(adadelta)
+    # 使用 AdaDetla 学习率不起作用
+    # p 是RMSprop和AdaDelta中使用的衰减率, 默认是0.9
+    # m 是动量因子, 默认是0, 通常是0.5
+    # nesterov 默认False， 表示不开启 Nesterov 加速梯度
+    def __init__(self, epochs, rate=0.01, e=1e-6, batch_size=0, alg="", p=0.9, m=0, nesterov=False):
         self.theta = None
         self.epochs = epochs
         self.rate = rate
         self.e = e
-        self.alr = alr
         self.t = 0
         self.list = []
         self.batch_size = batch_size
-        self.ada = ada
-        self.g = None
+        self.sigma = None
         self.mse = np.inf
-        self.ep = 1e-6
+        self.ep = 1e-10
+        self.p = p
+        self.momentum = m
+        self.lastV = 0
+        self.nesterov = nesterov
+        if nesterov:
+            self.updateTheta = self.NAG
+        if alg == "":
+            self.fitTheta = self.simple
+        elif alg == "adaptive":
+            self.fitTheta = self.adaptive
+        elif alg == "adagrad":
+            self.fitTheta = self.adagrad
+        elif alg == "rmsprop":
+            self.fitTheta = self.RMSprop
+        elif alg == "adadelta":
+            self.diffXSquare = 0
+            self.fitTheta = self.AdaDelta
+        else:
+            print("错误的算法: " + alg)
+            self.fitTheta = self.simple
 
-    def Rate(self, d):
-        # 自适应学习率
-        rate = np.c_[np.ones(d)] * self.rate
-        if self.alr:
-            if self.ada:
-                return rate / (pow(self.g * self.g, 0.5) + self.ep)
-            return rate / pow(self.t + 1, 0.5)
-        return rate
+    def updateTheta(self, v):
+        self.theta = self.theta - v
+
+    def NAG(self, v):
+        # 这里使用的是替换公式
+        self.theta = self.theta - (1 + self.momentum) * v + self.momentum * self.lastV
+
+    def simple(self, g):
+        v = self.rate * g - self.momentum * self.lastV
+        self.updateTheta(v)
+        self.lastV = v
+
+    def adaptive(self, g):
+        v = self.rate / pow(self.t + 1, 0.5) * g - self.momentum * self.lastV
+        self.updateTheta(v)
+        self.lastV = v
+
+    def adagrad(self, g):
+        self.sigma += np.square(g)
+        v = self.rate / (pow(self.sigma, 0.5) + self.ep) * g - self.momentum * self.lastV
+        self.updateTheta(v)
+        self.lastV = v
+
+    def RMSprop(self, g):
+        self.sigma = self.sigma * self.p + (1 - self.p) * np.square(g)
+        v = self.rate / (pow(self.sigma + self.ep, 0.5)) * g - self.momentum * self.lastV
+        self.updateTheta(v)
+        self.lastV = v
+
+    def AdaDelta(self, g):
+        self.sigma = self.sigma * self.p + (1 - self.p) * np.square(g)
+        v = pow(self.diffXSquare + self.ep, 0.5) / pow(self.sigma + self.ep, 0.5) * g - self.momentum * self.lastV
+        self.updateTheta(v)
+        self.lastV = v
+        self.diffXSquare = self.p * self.diffXSquare + (1-self.p) * v * v
 
     def getData(self, X, Y):
         if self.batch_size > 0:
@@ -40,7 +91,6 @@ class LR_GD:
             return X, Y
 
     def gradient(self, X, Y):
-        # y = b0 + b1x1 + b2x2 + ... + bnxn
         return -2 / len(X) * X.T @ (Y - X @ self.theta)
 
     def fit(self, X, Y):
@@ -48,17 +98,15 @@ class LR_GD:
         self.list = [i for i in range(len(X))]
         Y = Y.reshape(len(Y), 1)
         data = np.c_[np.ones(len(X)), X]
+        self.rate = np.c_[np.ones(len(data[0]))] * self.rate
         self.mse = np.inf
         self.theta = np.c_[np.zeros(len(data[0]))]
-        self.g = np.c_[np.zeros(len(data[0]))]
-        size = len(self.theta)
+        self.sigma = np.c_[np.zeros(len(data[0]))]
         while self.t < self.epochs and self.mse > self.e:
             # 打乱索引
             batch_X, batch_Y = self.getData(data, Y)
             g = self.gradient(batch_X, batch_Y)
-            self.g += g
-            v = self.Rate(size) * g
-            self.theta = self.theta - v
+            self.fitTheta(g)
             self.t += 1
         self.mse = self.meanSquareError(X, Y)
         print("训练完成, MSE=" + str(self.mse) + " 训练" + str(self.t) + "次")

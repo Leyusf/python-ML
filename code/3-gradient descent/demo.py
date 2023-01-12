@@ -60,7 +60,7 @@ linearRegressor_GD = LR_GD(epochs=2000, rate=0.01)
 linearRegressor_GD.fit(X_train, Y_train)
 Y_Pred = linearRegressor_GD.predict(X_test)
 print(Y_Pred)
-print(np.sum(np.square(Y_Pred - Y_test)) / len(X_test))
+print(linearRegressor_GD.meanSquareError(X_test, Y_test))
 
 # SGD
 print("SGD:")
@@ -68,7 +68,7 @@ lR_SGD = LR_GD(epochs=2000, rate=0.01, batch_size=5)
 lR_SGD.fit(X_train, Y_train)
 Y_Pred = lR_SGD.predict(X_test)
 print(Y_Pred)
-print(np.sum(np.square(Y_Pred - Y_test)) / len(X_test))
+print(lR_SGD.meanSquareError(X_test, Y_test))
 
 # GD二次
 print("GD 2次:")
@@ -76,7 +76,7 @@ lR_GD2 = LR_GD(epochs=200000, rate=0.0004)
 lR_GD2.fit(X_train_2, Y_train)
 Y_Pred = lR_GD2.predict(X_test_2)
 print(Y_Pred)
-print(np.sum(np.square(Y_Pred - Y_test)) / len(X_test))
+print(lR_GD2.meanSquareError(X_test_2, Y_test))
 
 
 
