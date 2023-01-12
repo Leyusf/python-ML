@@ -19,3 +19,5 @@
 
 #### 3. 梯度下降
 [梯度下降](/code/3-gradient%20descent/gradient%20descent.md)
+
+[梯度下降实现](/code/3-gradient%20descent/LR_GD.py)
