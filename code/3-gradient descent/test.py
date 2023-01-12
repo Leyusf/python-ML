@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
-from LR_GD import LR_GD
+from testLR import LR_GD
 
 # 1. 数据预处理
 dataset = pd.read_csv("winequality-white.csv")
@@ -50,7 +50,7 @@ print(np.sum(np.square(Y_pred - Y_test)) / len(X_test))
 
 # Adagrad
 print("\nAdagrad:")
-linearRegressor_GD = LR_GD(epochs=20000, rate=0.01, alr=True, ada=True, batch_size=100)
+linearRegressor_GD = LR_GD(epochs=20000, rate=0.01, alg="rmsprop", batch_size=100)
 linearRegressor_GD.fit(X_train, Y_train)
 Y_Pred = linearRegressor_GD.predict(X_test)
 print(Y_Pred)

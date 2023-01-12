@@ -72,6 +72,7 @@ $\eta^t = \eta / \sqrt {t+1}$
 
 最理想的情况是，每个参数都有属于自己的学习率，即每个 $\theta$ 都有自己对应的 $\eta$
 
+
 ### 随机梯度下降（SDG）
 
 上面提到的梯度下降算法是批量梯度下降，即对整个数据集进行更新。
@@ -81,6 +82,7 @@ $\eta^t = \eta / \sqrt {t+1}$
 SGD算法是**从样本中随机抽出一组，训练后按梯度更新一次，然后再抽取一组，再更新一次，在样本量及其大的情况下，可能不用训练完所有的样本就可以获得一个损失值在可接受范围之内的模型了。**
 
 **一组可以是一个，或是mini batch**
+
 
 ### Adagrad
 
@@ -100,11 +102,28 @@ SGD算法是**从样本中随机抽出一组，训练后按梯度更新一次，
 
 化简:
 
-![image.png](./assets/1673258316352-image.png)
+$$
+\theta_i^{t+1} = \theta_i^t-{\eta^t \over \sigma_i^t} g_i^t
+=\theta_i^t - {{\eta \over \sqrt {t+1}} \over \sqrt {{1 \over t+1} [(g_i^0)^2+(g_i^1)^2+...+(g_i^t)^2}]} g_i^t
+=\theta_i^t - {\eta \over \sqrt {\sum^t_{j=0}(g^j_i)^2}}
+
+$$
 
 Adagrad算法的缺点是在经过一定次数的迭代依然没有找到最优点时，由于这时的学习率已经非常小，很难再继续找到最优点。
 
 改进算法有 RMSprop 和 AdaDelta。
+
+### RMSprop
+
+RMSProp 使用指数加权移动平均值来削弱遥远过去的梯度的影响。
+
+需要设置一个衰减率 $\rho$
+
+$\sigma_i^t = \sqrt {{\rho\over t+1}(\sigma_i^{t-1}+{(1-\rho)\over \rho} (g_i^t)^2)}$
+
+最终化简为:
+
+$\theta_i^{t+1}=\theta_i^t-{\eta \over \sqrt {\rho \sigma_i^{t-1}+(1-\rho)(g_i^t)^2}}g_i^t$
 
 ### 动量
 
