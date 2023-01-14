@@ -100,14 +100,8 @@ SGD算法是**从样本中随机抽出一组，训练后按梯度更新一次，
 
 化简:
 
-$$
+$\theta_i^{t+1} = \theta_i^t-{\eta^t \over \sigma_i^t} g_i^t=\theta_i^t - {{\eta \over \sqrt {t+1}} \over \sqrt {{1 \over t+1} [(g_i^0)^2+(g_i^1)^2+...+(g_i^t)^2}]} g_i^t=\theta_i^t - {\eta \over \sqrt {\sum^t_{j=0}(g^j_i)^2}}$
 
-\theta_i^{t+1} = \theta_i^t-{\eta^t \over \sigma_i^t} g_i^t
-=\theta_i^t - {{\eta \over \sqrt {t+1}} \over \sqrt {{1 \over t+1} [(g_i^0)^2+(g_i^1)^2+...+(g_i^t)^2}]} g_i^t
-=\theta_i^t - {\eta \over \sqrt {\sum^t_{j=0}(g^j_i)^2}}
-
-
-$$
 
 Adagrad算法的缺点是在经过一定次数的迭代依然没有找到最优点时，由于这时的学习率已经非常小，很难再继续找到最优点。
 
