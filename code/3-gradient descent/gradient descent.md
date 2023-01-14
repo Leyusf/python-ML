@@ -119,6 +119,18 @@ $\sigma_i^t = \sqrt {{\rho\over t+1}(\sigma_i^{t-1}+{(1-\rho)\over \rho} (g_i^t)
 
 $\theta_i^{t+1}=\theta_i^t-{\eta \over \sqrt {\rho \sigma_i^{t-1}+(1-\rho)(g_i^t)^2}}g_i^t$
 
+### AdaDelta
+
+AdaDelta 还引入了每次参数更新差 $\delta\theta$ 的平方的指数加权移动平均值 $\delta X^2$。
+
+$\delta X^2_{t-1} = \rho \delta X^2_{t-2}+(1-\rho)\delta \theta_{t-1}^2$
+
+最终化简为:
+
+$\delta \theta = -{\sqrt {\delta X^2_{t-1}} \over \sigma_t}g_t$
+
+$\theta^{t+1} = \theta^t + \delta \theta$
+
 ### 动量
 
 由于SDG会想着局部最优收敛。为了解决这一问题，动量被使用来抑制SDG的振荡。
