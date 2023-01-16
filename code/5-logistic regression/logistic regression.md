@@ -8,7 +8,7 @@
 
 逻辑回归训练的过程是通过创造基于极大似然估计原理的损失函数(Loss Function)，并利用梯度下降法更新模型中的权重，使得损失函数达到最小。
 
-$ y_i = P(y_i=1) = {1 \over 1 + e^{\theta^Tx_i}}$
+$y_i = P(y_i=1) = {1 \over 1 + e^{\theta^Tx_i}}$
 
 ### 损失函数
 
@@ -30,11 +30,11 @@ $C(f(x^n),y^n)=-[y^nlnf_{\theta}(x^n)+(1-y^n)ln(1-f_{\theta}(x^n))]$
 
 给定一个 $\theta$, 产生这个数据的可能性是
 
-$ L(\theta)=f_{\theta}(x^1)f_{\theta}(x^2)...f_{\theta}(x^{200})(1-f_{\theta}(x^{201}))...(1-f_{\theta}(x^{500}))$
+$L(\theta)=f_{\theta}(x^1)f_{\theta}(x^2)...f_{\theta}(x^{200})(1-f_{\theta}(x^{201}))...(1-f_{\theta}(x^{500}))$
 
 可能性越大，偏差大越小，所以要找到使得这个式子最大的 $\theta^*$
 
-$ \theta^* = argmax_{\theta} L(\theta)$
+$\theta^* = argmax_{\theta} L(\theta)$
 
 $\theta^*=argmin_{\theta} (-lnL(\theta))$
 
@@ -103,8 +103,8 @@ $\theta_i=\theta_i-\eta\sum_n-(y^n-f(x^n))x^n_i$
 
 sigmoid 函数是: $\sigma(z)={1 \over 1+e^{-z}}$
 
-导数形式是:$\sigma^{'}(z)=\sigma(z)(1-\sigma(z))$
+导数形式是: $\sigma^{'}(z)=\sigma(z)(1-\sigma(z))$
 
-损失函数是:$L(\theta)=-\sum_n[y^nlnf_{\theta}(x^n)+(1-y^n)ln(1-f_{\theta}(x^n))]$
+损失函数是: $L(\theta)=-\sum_n[y^nlnf_{\theta}(x^n)+(1-y^n)ln(1-f_{\theta}(x^n))]$
 
-损失函数求导（梯度）:$-{\partial lnL(\theta) \over \partial \theta_i}=\sum_n-(y^n-f(x^n))x^n_i$
+损失函数求导（梯度）: $-{\partial lnL(\theta) \over \partial \theta_i}=\sum_n-(y^n-f(x^n))x^n_i$
