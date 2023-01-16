@@ -30,7 +30,6 @@
 4. 概率分类原理: 给定一个x，预测它的类别 $C$
    $P(C_1|x) = {P(C_1)P(x|C_1) \over P(C_1)P(x|C_1) + P(C_2)P(x|C_2) + ... + P(C_n)P(x|C_n)}$
 
-
 ### 似然
 
 从概率推参数的过程。
@@ -40,7 +39,6 @@
 计算概率 $P(X|\theta)$ ,在条件为 $\theta$ 下发生 $X$ 的概率。
 
 计算似然 $L(\theta|X)$ ,在 $X$ 发生时，推断 $\theta$ 的值。
-
 
 ### 最大似然估计(Maximum Likelihood Estimate)
 
@@ -62,7 +60,6 @@ R W R R W
    ${\partial lnL(\theta) \over \partial \theta} = {3\over\theta}-{2\over1-\theta} = 0$
    $\theta={3\over5}$
 
-
 ### 高斯分布
 
 $f_{\mu,\Sigma}(x)={1 \over (2\pi)^{D/2}}{1\over|\Sigma|^{1/2}}e^{-{1\over 2}(x-\mu)^T\Sigma^{-1}(x-\mu)}$
@@ -76,8 +73,6 @@ $\mu$ 是均值期望
 $\Sigma$ 是协方差矩阵(方差组成的矩阵)
 
 $f_{\mu,\Sigma}(x)$ 概率密度
-
-
 
 ### 估计 $\mu$ 和 $\Sigma$
 
@@ -93,13 +88,11 @@ $\mu={\sum^n_{i=1}x^i\over n}$
 
 $\Sigma={\sum^n_{i=1}(x^i-\mu)(x^i-\mu)^T \over n}$
 
-
 ### QDA
 
 $P(x| C_1)=f_{\mu_1,\Sigma_1}(x)$
 
 $P(x|C_2)=f_{\mu_2,\Sigma_2}(x)$
-
 
 ### LDA
 
@@ -113,7 +106,6 @@ $\mu_2={\sum^{m+n}_{i=n+1}x^i \over m}$
 
 $\Sigma={n\over n+m}\Sigma_1 + {m \over n+m}\Sigma_2$
 
-
 ### Naïve Bayes(朴素贝叶斯)
 
 当x的所有特征都是独立的，使用朴素贝叶斯。
@@ -121,3 +113,38 @@ $\Sigma={n\over n+m}\Sigma_1 + {m \over n+m}\Sigma_2$
 ![image.png](./assets/1673637220767-image.png)
 
 $P(x|C_1) = \prod^n_{i=1} P(x_i|C_1)$
+
+
+以上是生成模型(Generative), 分布的学习每个类，找到 $\mu_1,\mu_2,\Sigma$
+
+生成模型预测的根据是联合概率P(X,Y)，”生成” (X,Y)样本的概率分布
+
+
+
+以下的，包括逻辑回归是判别模型。
+
+判别模型，直接找到 $\theta$ 
+
+判别模型之所以称为“判别”模型 ，是因为其根据X “判别” Y；
+
+
+生成模型优点:
+
+由于有假设的概率分布，所以：
+
+1. 需要更少的训练数据
+2. 对噪音有更好的鲁棒性
+3. 先验概率和田间概率可能来自于其他的同源估计（不需要自己完成）
+
+
+### 二分类
+
+$P(C_1|x)={P(x|C_1)P(C_1) \over P(x|C_1)P(C_1) + P(x|C_2)P(C_2)}={1 \over 1+{P(x|C_2)P(C_2) \over P(x|C_1)P(C_1)}}$
+
+$= {1 \over 1+{e^{-z}}} = \sigma(z)$
+
+其中 $z=ln{P(x|C_1)P(C_1) \over P(x|C_2)P(C_2)}$
+
+这是一个sigmoid函数
+
+![image.png](./assets/1673880027067-image.png)
