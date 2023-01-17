@@ -162,4 +162,6 @@ sigmoid 损失函数是: $L(\theta)=-\sum_n[y^nlnf_{\theta}(x^n)+(1-y^n)ln(1-f_{
 
 sigmoid 损失函数求导（梯度）: $-{\partial lnL(\theta) \over \partial \theta_i}=\sum_n-(y^n-f(x^n))x^n_i$
 
-softmax 损失函数求导（梯度）: ${\partial y_i \over \partial z_j}=\{{ P_i(1-P_i), j=i\atop -P_jP_i, j\neq i}$
+softmax 损失函数求导（梯度）:
+
+![image.png](./assets/1673916674105-image.png)
