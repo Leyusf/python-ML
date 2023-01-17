@@ -117,7 +117,7 @@ class MyLogisticRegressor:
             g = self.gradient(batch_X, batch_Y)
             self.fitTheta(g)
             self.t += 1
-        self.bce = self.binaryCrossEntropy(X, Y)
+            self.bce = self.binaryCrossEntropy(X, Y)
         print("训练完成, BCE=" + str(self.bce) + " 训练" + str(self.t) + "次")
 
     def binaryCrossEntropy(self, X, Y):

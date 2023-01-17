@@ -109,7 +109,7 @@ class LR_GD:
             g = self.gradient(batch_X, batch_Y)
             self.fitTheta(g)
             self.t += 1
-        self.mse = self.meanSquareError(X, Y)
+            self.mse = self.meanSquareError(X, Y)
         print("训练完成, MSE=" + str(self.mse) + " 训练" + str(self.t) + "次")
 
     def meanSquareError(self, X, Y):
