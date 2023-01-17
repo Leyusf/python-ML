@@ -29,3 +29,6 @@
 [逻辑回归](/code/5-logistic%20regression/logistic%20regression.md)
 
 [逻辑回归实现](/code/5-logistic%20regression/LogisticRefressionImpl.py)
+
+#### 6. 模型评估
+[模型评估](/code/6-evaluation/evaluation.md)
