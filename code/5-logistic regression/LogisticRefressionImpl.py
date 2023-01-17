@@ -2,7 +2,14 @@ import numpy as np
 import random
 
 
-class LR_GD:
+def sigmoid(z):
+    r = 1 / (1 + np.exp(-z))
+    # 转换成列向量
+    r = r.reshape(r.shape[0], 1)
+    return r
+
+
+class MyLogisticRegressor:
 
     # epochs 是最大训练轮数
     # rate 是学习率
@@ -23,7 +30,7 @@ class LR_GD:
         self.list = []
         self.batch_size = batch_size
         self.sigma = None
-        self.mse = np.inf
+        self.bce = np.inf
         self.ep = 1e-10
         self.p = p
         self.momentum = m
@@ -80,7 +87,7 @@ class LR_GD:
         v = pow(self.diffXSquare + self.ep, 0.5) / pow(self.sigma + self.ep, 0.5) * g - self.momentum * self.lastV
         self.updateTheta(v)
         self.lastV = v
-        self.diffXSquare = self.p * self.diffXSquare + (1-self.p) * v * v
+        self.diffXSquare = self.p * self.diffXSquare + (1 - self.p) * v * v
 
     def getData(self, X, Y):
         if self.batch_size > 0:
@@ -92,7 +99,8 @@ class LR_GD:
             return X, Y
 
     def gradient(self, X, Y):
-        return -2 / len(X) * X.T @ (Y - X @ self.theta)
+        z = X @ self.theta
+        return -(X.T @ (Y - sigmoid(z))) / len(X)
 
     def fit(self, X, Y):
         self.t = 0
@@ -100,23 +108,25 @@ class LR_GD:
         Y = Y.reshape(len(Y), 1)
         data = np.c_[np.ones(len(X)), X]
         self.rate = np.c_[np.ones(len(data[0]))] * self.r
-        self.mse = np.inf
+        self.bce = np.inf
         self.theta = np.c_[np.zeros(len(data[0]))]
         self.sigma = np.c_[np.zeros(len(data[0]))]
-        while self.t < self.epochs and self.mse > self.e:
+        while self.t < self.epochs and self.bce > self.e:
             # 打乱索引
             batch_X, batch_Y = self.getData(data, Y)
             g = self.gradient(batch_X, batch_Y)
             self.fitTheta(g)
             self.t += 1
-        self.mse = self.meanSquareError(X, Y)
-        print("训练完成, MSE=" + str(self.mse) + " 训练" + str(self.t) + "次")
+        self.bce = self.binaryCrossEntropy(X, Y)
+        print("训练完成, BCE=" + str(self.bce) + " 训练" + str(self.t) + "次")
 
-    def meanSquareError(self, X, Y):
-        Y = Y.reshape(len(Y), 1)
-        error = Y - self.predict(X)
-        return np.ones(len(X)) @ (error * error) / len(X)
+    def binaryCrossEntropy(self, X, Y):
+        # 调整精度为1e-6
+        return -np.sum(Y.T @ np.log(self.predict(X) + self.ep) + (1 - Y).T @ np.log(1 - self.predict(X) + self.ep))/len(Y)
 
     def predict(self, X):
         data = np.c_[np.ones(len(X)), X]
-        return data @ self.theta
+        z = data @ self.theta
+        y_pred = sigmoid(z).reshape(len(X))
+        y_pred = (y_pred > 0.5) * 1
+        return y_pred
