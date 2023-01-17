@@ -59,7 +59,7 @@ N = 所有负样本的数量 = TN + FP
 
 我们经常使用**精度**来衡量：
 
-$acc={(TP + TN) \over P+N} $ 即正确分类数除以总数
+$acc={(TP + TN) \over P+N}$ 即正确分类数除以总数
 
 **错误率(Error rates)**：
 
