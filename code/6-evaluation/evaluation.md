@@ -79,7 +79,6 @@ $acc={(TP + TN) \over P+N}$ 即正确分类数除以总数
 
 除了F1-score，其他的都是成对的冲突参数。
 
-
 **PR曲线（Precision-Recall curve）**：
 
 ![image.png](./assets/image.png)
@@ -87,7 +86,6 @@ $acc={(TP + TN) \over P+N}$ 即正确分类数除以总数
 曲线下方面积越大，性能越好。
 
 平均精度（Average Precision ，AP）是PR曲线下的面积。
-
 
 ### 多分类的性能评估
 
@@ -109,11 +107,13 @@ $acc={(TP + TN) \over P+N}$ 即正确分类数除以总数
 
 ![image.png](./assets/1673961101971-image.png)
 
-
 ### 数据
 
 在分类中，使用分层抽样来确保类在两个数据集中的表示一致。
 
+#### 数据泄露
+
+测试集很容易数据泄露，即其中的数据出现在训练集中。
 
 ### k折交叉验证（k-fold cross validation）
 
