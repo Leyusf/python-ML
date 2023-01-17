@@ -21,3 +21,11 @@
 [梯度下降](/code/3-gradient%20descent/gradient%20descent.md)
 
 [梯度下降实现](/code/3-gradient%20descent/LR_GD.py)
+
+#### 4. 分类
+[分类原理](/code/4-classification/classification.md)
+
+#### 5. 逻辑回归
+[逻辑回归](/code/5-logistic%20regression/logistic%20regression.md)
+
+[逻辑回归实现](/code/5-logistic%20regression/LogisticRefressionImpl.py)
