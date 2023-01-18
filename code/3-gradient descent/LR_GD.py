@@ -77,10 +77,12 @@ class LR_GD:
 
     def AdaDelta(self, g):
         self.sigma = self.sigma * self.p + (1 - self.p) * np.square(g)
+        # diffXSquare的更新在前后都可以
+        self.diffXSquare = self.p * self.diffXSquare + (1 - self.p) * self.lastV * self.lastV
         v = pow(self.diffXSquare + self.ep, 0.5) / pow(self.sigma + self.ep, 0.5) * g - self.momentum * self.lastV
         self.updateTheta(v)
         self.lastV = v
-        self.diffXSquare = self.p * self.diffXSquare + (1-self.p) * v * v
+
 
     def getData(self, X, Y):
         if self.batch_size > 0:
