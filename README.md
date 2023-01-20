@@ -24,8 +24,11 @@
 
 #### 4. 分类
 [分类原理](/code/4-classification/classification.md)
+
 [QDA实现](/code/4-classification/QDA.py)
+
 [LDA实现](/code/4-classification/LDA.py)
+
 [Naive Bayes实现](/code/4-classification/NaiveBayes.py)
 
 #### 5. 逻辑回归
