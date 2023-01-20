@@ -71,9 +71,31 @@ $x$ 是长度为 $D$ 的向量
 
 $\mu$ 是均值期望
 
-$\Sigma$ 是协方差矩阵(方差组成的矩阵)
+$\Sigma$ 是协方差矩阵(其中的计算不是绝对值，是det计算)
 
 $f_{\mu,\Sigma}(x)$ 概率密度
+
+### 协方差
+
+各个维度偏离其均值的程度，用于衡量两个变量的总体误差。
+
+e.g.
+
+![](https://img-blog.csdnimg.cn/img_convert/e561249f59f6e071860de253ebf3274f.png)
+
+其中，X和Y是样本的两个维度（特征）。
+
+总共有n个样本。
+
+### 协方差矩阵
+
+设 $X=[x_1,x_2]^T$ 为2维随机变量。
+
+则 $X$ 的协方差矩阵是：
+
+![](https://bkimg.cdn.bcebos.com/formula/b28e723b30e0f878d6446b1008a8005b.svg)
+
+其中 $c_{ij}=cov(x_i,x_j) \ ,i,j=1,2$
 
 ### 估计 $\mu$ 和 $\Sigma$
 
@@ -107,13 +129,21 @@ $\mu_2={\sum^{m+n}_{i=n+1}x^i \over m}$
 
 $\Sigma={n\over n+m}\Sigma_1 + {m \over n+m}\Sigma_2$
 
+二者的区别在于，QDA的每个类别都可以拥有自己的协方差矩阵。当决策边界为非线性时，QDA通常会表现更好。
+
+LDA通常在训练观察次数较少时（即需要减少方差时）表现更好。
+
 ### Naïve Bayes(朴素贝叶斯)
 
-当x的所有特征都是独立的，使用朴素贝叶斯。
+当x的所有特征都是**独立**的，使用朴素贝叶斯。
 
 ![image.png](./assets/1673637220767-image.png)
 
 $P(x|C_1) = \prod^n_{i=1} P(x_i|C_1)$
+
+这里很容易的连乘很容易造成下溢，使用一般使用对数似然:
+
+$logP(x|C_1)= \sum^n_{i=1} logP(x_i|C_1)$
 
 以上是生成模型(Generative), 分布的学习每个类，找到 $\mu_1,\mu_2,\Sigma$
 
