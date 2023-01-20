@@ -93,7 +93,7 @@ e.g.
 
 则 $X$ 的协方差矩阵是：
 
-![](https://bkimg.cdn.bcebos.com/formula/b28e723b30e0f878d6446b1008a8005b.svg)
+![image.png](./assets/1674251382488-image.png)
 
 其中 $c_{ij}=cov(x_i,x_j) \ ,i,j=1,2$
 
