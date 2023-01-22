@@ -21,16 +21,16 @@ class QDA:
             self.cov[c] = np.cov(X_c, rowvar=False)
 
     def predict(self, X):
-        postProbs = list()
+        pred = list()
         length = X.shape[1]
         for x in X:
-            posts = list()
+            postProbs = list()
             for c in self.classes:
-                post = 1 / ((2 * np.pi ** (length / 2)) * np.linalg.det(self.cov[c]) ** 0.5) * \
+                likelihood = 1 / ((2 * np.pi ** (length / 2)) * np.linalg.det(self.cov[c]) ** 0.5) * \
                        pow(np.e, -0.5 * (x - self.mu[c]).T @ np.linalg.pinv(self.cov[c]) @ (x - self.mu[c]))
-                posts.append(post)
-            pred = self.classes[np.argmax(posts)]
-            postProbs.append(pred)
-        return postProbs
+                postProbs.append(likelihood * self.priorProbs[c])
+            x_class = self.classes[np.argmax(postProbs)]
+            pred.append(x_class)
+        return pred
 
 

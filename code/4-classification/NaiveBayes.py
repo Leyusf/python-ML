@@ -21,14 +21,14 @@ class NaiveBayes:
             self.std[c] = np.sqrt(np.sum(np.square(X_c - self.mu[c]), axis=0) / X_c.shape[0])
 
     def predict(self, X):
-        postProbs = list()
+        pred = list()
         for x in X:
             log_posts = list()
             for c in self.classes:
                 likelihood = (1/(np.sqrt(2*np.pi)*self.std[c])) * np.exp((-(x-self.mu[c])**2)/(2*self.std[c]**2))
-                log_posts.append(np.prod(likelihood))
-            pred = self.classes[np.argmax(log_posts)]
-            postProbs.append(pred)
-        return postProbs
+                log_posts.append(np.sum(np.log(likelihood)) + np.log(self.priorProbs[c]))
+            x_class = self.classes[np.argmax(log_posts)]
+            pred.append(x_class)
+        return pred
 
 
