@@ -66,7 +66,7 @@ $=\sum^n_{i=1}ln(y_i* \sigma(x_i) + (1-y_i)(1-\sigma(x_i)))$
 
 对这个式子两边添加符号可以获得一个求最小值的函数，可以作为损失函数。
 
-损失函数： $L(\theta) = -ln(Likelihood) = \sum^n_{i=1}-[y_i * \sigma(x_i)+(1-y_i)*(1-\sigma(x_i))]$
+损失函数： $L(\theta) = -ln(Likelihood) = \sum^n_{i=1}-[y_i * ln(\sigma(x_i))+(1-y_i)*ln((1-\sigma(x_i)))]$
 
 **注意**：这里的损失函数看上去是难以处理的，但是由于y的取值特性，中括号中最终只会留下来一项。
 
