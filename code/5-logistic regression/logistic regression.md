@@ -22,7 +22,6 @@ $ln {y \over 1-y}=\theta^Tx$
 
 表示的是x作为正例的相对可能性。
 
-
 ### 损失函数
 
 对于逻辑回归模型，我们希望找到一个权重向量 $\theta$，使得在训练集中模型的输出与给定的标签越接近越好，及若标签为1，则模型输出值越接近1，若标签为0，则模型输出值越接近于0。
@@ -73,8 +72,6 @@ $=\sum^n_{i=1}ln(y_i* \sigma(x_i) + (1-y_i)(1-\sigma(x_i)))$
 
 **方法**：假设 $f_{\theta}(x) = P(y=1|x)$
 
-
-
 假设前两百个数据是第一类，后三百个数据是第二类
 
 给定一个 $\theta$, 产生这个数据的可能性是
@@ -97,14 +94,11 @@ $=-[y^{1}lnf(x^{1})+(1-y^{1})ln(1-f(x^{1}))]-[y^{2}lnf(x^{2})+(1-y^{2})ln(1-f(x^
 
 $=\sum_n-[y^nlnf(x^n)+(1-y^n)ln(1-f(x^n))]$
 
-
-
 损失函数为 $L(f)=\sum_nC(f(x^n),y^n)$
 
 $C(f(x^n),y^n)=-[y^nlnf_{\theta}(x^n)+(1-y^n)ln(1-f_{\theta}(x^n))]$
 
 其实是 $L=-\sum^n_{i=1}y_ilnP_i$
-
 
 ### 梯度下降法计算权重
 
@@ -140,22 +134,17 @@ ${\partial ln(1-f(x^n)) \over \partial \theta_i} =-f(x^n)x^n_i$
 
 $-{\partial lnL(\theta) \over \partial \theta_i}=\sum_n-(y^n-f(x^n))x^n_i$
 
-
 所以更新 $\theta_i$ 使用:
 
 这种形式叫做交叉熵(cross entropy)
 
 $\theta_i=\theta_i-\eta\sum_n-(y^n-f(x^n))x^n_i$
 
-
-
 ### 逻辑回归为什么可以用来分类？
 
 逻辑回归是回归的一种，由于其预测的值是一个二项分布的，也就是说预测0或1。
 
 所以可以用来解决二分类问题。
-
-
 
 ### 多分类
 
@@ -169,7 +158,7 @@ $\theta_i=\theta_i-\eta\sum_n-(y^n-f(x^n))x^n_i$
 
 ![](https://img-blog.csdnimg.cn/3a3305ab28b246aa8ec0e99511229e9b.png)
 
-$Softmax(z_i)={e^{z_i} \over \sum^n_i=1 e^{z_i}}$
+$Softmax(z_i)={e^{z_i} \over \sum^n_{i=1} e^{z_i}}$
 
 引入指数函数对于Softmax函数是把双刃剑
 

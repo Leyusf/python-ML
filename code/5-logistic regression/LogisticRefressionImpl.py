@@ -21,6 +21,7 @@ class MyLogisticRegressor:
     # m 是动量因子, 默认是0, 通常是0.5
     # nesterov 默认False， 表示不开启 Nesterov 加速梯度
     def __init__(self, epochs, rate=0.01, e=1e-6, batch_size=0, alg="", p=0.9, m=0, nesterov=False):
+        self.g = None
         self.theta = None
         self.epochs = epochs
         self.r = rate
@@ -111,18 +112,20 @@ class MyLogisticRegressor:
         self.bce = np.inf
         self.theta = np.c_[np.zeros(len(data[0]))]
         self.sigma = np.c_[np.zeros(len(data[0]))]
-        while self.t < self.epochs and self.bce > self.e:
+        self.g = 1
+        while self.t < self.epochs and np.linalg.norm(self.g) > self.e:
             # 打乱索引
             batch_X, batch_Y = self.getData(data, Y)
-            g = self.gradient(batch_X, batch_Y)
-            self.fitTheta(g)
+            self.g = self.gradient(batch_X, batch_Y)
+            self.fitTheta(self.g)
             self.t += 1
             self.bce = self.binaryCrossEntropy(X, Y)
         print("训练完成, BCE=" + str(self.bce) + " 训练" + str(self.t) + "次")
 
     def binaryCrossEntropy(self, X, Y):
         # 调整精度为1e-6
-        return -np.sum(Y.T @ np.log(self.predict(X) + self.ep) + (1 - Y).T @ np.log(1 - self.predict(X) + self.ep))/len(Y)
+        return -np.sum(
+            Y.T @ np.log(self.predict(X) + self.ep) + (1 - Y).T @ np.log(1 - self.predict(X) + self.ep)) / len(Y)
 
     def predict(self, X):
         data = np.c_[np.ones(len(X)), X]

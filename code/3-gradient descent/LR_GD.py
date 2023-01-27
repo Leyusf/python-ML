@@ -13,7 +13,8 @@ class LR_GD:
     # p 是RMSprop和AdaDelta中使用的衰减率, 默认是0.9
     # m 是动量因子, 默认是0, 通常是0.5
     # nesterov 默认False， 表示不开启 Nesterov 加速梯度
-    def __init__(self, epochs, rate=0.01, e=1e-6, batch_size=0, alg="", p=0.9, m=0, nesterov=False):
+    def __init__(self, epochs, rate=0.01, e=1e-8, batch_size=0, alg="", p=0.9, m=0, nesterov=False):
+        self.g = None
         self.theta = None
         self.epochs = epochs
         self.r = rate
@@ -83,7 +84,6 @@ class LR_GD:
         self.updateTheta(v)
         self.lastV = v
 
-
     def getData(self, X, Y):
         if self.batch_size > 0:
             random.shuffle(self.list)
@@ -105,11 +105,12 @@ class LR_GD:
         self.mse = np.inf
         self.theta = np.c_[np.zeros(len(data[0]))]
         self.sigma = np.c_[np.zeros(len(data[0]))]
-        while self.t < self.epochs and self.mse > self.e:
+        self.g = 1
+        while self.t < self.epochs and np.linalg.norm(self.g) > self.e:
             # 打乱索引
             batch_X, batch_Y = self.getData(data, Y)
-            g = self.gradient(batch_X, batch_Y)
-            self.fitTheta(g)
+            self.g = self.gradient(batch_X, batch_Y)
+            self.fitTheta(self.g)
             self.t += 1
             self.mse = self.meanSquareError(X, Y)
         print("训练完成, MSE=" + str(self.mse) + " 训练" + str(self.t) + "次")
@@ -117,7 +118,7 @@ class LR_GD:
     def meanSquareError(self, X, Y):
         Y = Y.reshape(len(Y), 1)
         error = Y - self.predict(X)
-        return np.ones(len(X)) @ (error * error) / len(X)
+        return (error * error).mean()
 
     def predict(self, X):
         data = np.c_[np.ones(len(X)), X]
