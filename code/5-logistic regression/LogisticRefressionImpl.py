@@ -20,7 +20,7 @@ class MyLogisticRegressor:
     # p 是RMSprop和AdaDelta中使用的衰减率, 默认是0.9
     # m 是动量因子, 默认是0, 通常是0.5
     # nesterov 默认False， 表示不开启 Nesterov 加速梯度
-    def __init__(self, epochs, rate=0.01, e=1e-6, batch_size=0, alg="", p=0.9, m=0, nesterov=False):
+    def __init__(self, epochs, rate=0.01, e=1e-4, batch_size=0, alg="", p=0.9, m=0, nesterov=False):
         self.g = None
         self.theta = None
         self.epochs = epochs
