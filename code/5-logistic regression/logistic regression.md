@@ -130,7 +130,7 @@ ${\partial ln(1-f(x^n)) \over \partial z} ={\partial ln(1-\sigma(z))\over \parti
 
 ${\partial ln(1-f(x^n)) \over \partial \theta_i} =-f(x^n)x^n_i$
 
-综上所述可知，$\theta_i$ 当前的梯度是:
+综上所述可知， $\theta_i$ 当前的梯度是:
 
 $-{\partial lnL(\theta) \over \partial \theta_i}=\sum_n-(y^n-f(x^n))x^n_i$
 
