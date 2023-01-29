@@ -40,7 +40,6 @@ print(count_right)
 from LR_GD import LR_GD
 mlr = LR_GD(1500, 0.01)
 mlr.fit(X_train, Z_train)
-y_pred = y_pred * 0
 y_pred = (lr.predict(X_test) > 0) * 0.8 + 0.1
 print(y_pred)
 count_right = sum(y_pred == y_test) * 1.0 / len(y_test)

@@ -49,7 +49,7 @@ class BinaryClassifierEvaluator:
 
     def precision(self):
         # 精度
-        return self.TP / (self.TP+self.FP)
+        return self.TP / (self.TP + self.FP)
 
     def recall(self):
         # 召回率
@@ -58,10 +58,8 @@ class BinaryClassifierEvaluator:
     def F1_score(self):
         return 2 * (self.precision() * self.recall()) / (self.precision() + self.recall())
 
-
-
-
-r = BinaryClassifierEvaluator()
-Y = np.array([1, 1, 0, 0, 1])
-Y_p = np.array([1, 0, 0, 1, 0])
-r.evaluate(Y, Y_p)
+    def confusion_matrix(self):
+        return np.array([
+            [self.TN, self.FP],
+            [self.FN, self.TP]
+        ])
