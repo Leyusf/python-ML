@@ -2,7 +2,9 @@
 机器学习
 
 #### 1. 数据预处理
-[数据预处理](/code/1-data%20preprocess/dataPreprocessing.py)
+[数据预处理](/code/1-data%20preprocess/data%20preprocessing.md)
+
+[数据预处理使用](/code/1-data%20preprocess/dataPreprocessing.py)
 
 [练习numpy的使用](/code/1-data%20preprocess/practice/p1.py)
 
