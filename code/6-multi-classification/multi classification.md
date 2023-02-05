@@ -165,7 +165,7 @@ softmax函数
 
 我们想要找到的偏导是：
 
-${\partial g_i \over \partial z_i} = {\partial {e^{z_i} \over \sum^C_{i'=1}e^{z_{i'}}} \over \partial z_j} = {\partial {e^{z_i} \over S} \over \partial z_j}$
+${\partial g_i \over \partial z_j} = {\partial {e^{z_i} \over \sum^C_{i'=1}e^{z_{i'}}} \over \partial z_j} = {\partial {e^{z_i} \over S} \over \partial z_j}$
 
 由于：
 
