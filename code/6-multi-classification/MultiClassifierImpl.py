@@ -3,6 +3,8 @@ import random
 
 
 def softmax(z):
+    d = np.max(z)
+    z -= d
     z_exp = np.exp(z + 1e-6)
     partition = z_exp.sum(1, keepdims=True)
     return z_exp / partition
