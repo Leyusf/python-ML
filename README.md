@@ -41,7 +41,7 @@
 #### 6. 多分类
 [多分类](/code/6-multi-classification/multi%20classification.md)
 
-[softmax回归实现那](/code/6-multi-classification/MultiClassifierImpl.py)
+[softmax回归实现](/code/6-multi-classification/MultiClassifierImpl.py)
 
 #### 7. 模型评估
 [模型评估](/code/6-evaluation/evaluation.md)
