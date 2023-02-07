@@ -44,4 +44,4 @@
 [softmax回归实现](/code/6-multi-classification/MultiClassifierImpl.py)
 
 #### 7. 模型评估
-[模型评估](/code/6-evaluation/evaluation.md)
+[模型评估](/code/7-evaluation/evaluation.md)
