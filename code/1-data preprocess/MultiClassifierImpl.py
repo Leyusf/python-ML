@@ -21,7 +21,9 @@ class MyMultiClassifier:
     # p 是RMSprop和AdaDelta中使用的衰减率, 默认是0.9
     # m 是动量因子, 默认是0, 通常是0.5
     # nesterov 默认False， 表示不开启 Nesterov 加速梯度
-    def __init__(self, epochs, rate=0.01, e=1e-4, batch_size=0, alg="", p=0.9, m=0, nesterov=False):
+    def __init__(self, epochs, rate=0.01, e=1e-4, batch_size=0, alg="", p=0.9, m=0, nesterov=False, penalty="none",
+                 lambda_=0.1):
+        self.lambda_ = lambda_
         self.g = None
         self.theta = None
         self.epochs = epochs
@@ -54,6 +56,27 @@ class MyMultiClassifier:
         else:
             print("错误的算法: " + alg)
             self.fitTheta = self.simple
+        if penalty == "none":
+            pass
+        elif penalty == "l1":
+            self.regularised = self.l1
+        elif penalty == "l2":
+            self.regularised = self.l2
+        else:
+            print("错误的正则化参数")
+
+    def regularised(self):
+        return self.lambda_
+
+    def l1(self):
+        l1 = self.lambda_ * np.sign(self.theta)
+        l1[0, :] = 0  # 不对截距项进行正则化
+        return l1
+
+    def l2(self):
+        l2 = self.lambda_ * self.theta
+        l2[0, :] = 0
+        return l2
 
     def updateTheta(self, v):
         self.theta = self.theta - v
@@ -103,7 +126,7 @@ class MyMultiClassifier:
     def gradient(self, X, Y):
         z = X @ self.theta
         p = softmax(z)
-        return -(X.T @ (Y - p)) / len(X)
+        return (-(X.T @ (Y - p)) / len(X)) + (self.regularised() / len(X))
 
     def fit(self, X, Y):
         self.t = 0

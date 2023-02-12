@@ -87,3 +87,15 @@ $RSS(\theta)=||y-X\theta||^2_2+\lambda||\theta||^2_2$
 使用L1的是lasso regression，使用L2的是ridge regression。
 
 $\lambda$ 是正则化参数，越大则约束越严格，容易欠拟合，越小则约束越松散，容易过拟合。
+
+**带有L1正则化的损失函数的梯度：**
+
+${∂L(\theta)\over ∂\theta} = {∂L(\theta)\over ∂\theta} + {λ \over n} * sign(\theta) $
+
+其中,
+
+![image.png](./assets/1676226328425-image.png)
+
+**带有L2正则化的损失函数的梯度：**
+
+${∂L(\theta)\over ∂\theta} = {∂L(\theta)\over ∂ \theta} + {λ \over n} * \theta $

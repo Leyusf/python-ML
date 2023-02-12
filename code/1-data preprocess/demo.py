@@ -19,7 +19,7 @@ label_binarizer.fit(y_train)
 y_train = label_binarizer.transform(y_train)
 y_test = label_binarizer.transform(y_test)
 
-classifier = MyMultiClassifier(4500)
+classifier = MyMultiClassifier(10000, penalty="l2", alg="adadelta", lambda_=2)
 classifier.fit(X_train, y_train)
 
 y_pred = classifier.predict(X_test)
@@ -41,7 +41,7 @@ sc = StandardScaler()
 X_train = sc.fit_transform(X_train)
 X_test = sc.transform(X_test)
 
-classifier = LogisticRegression()
+classifier = LogisticRegression(penalty="l2", C=0.5)
 classifier.fit(X_train, y_train)
 y_pred = classifier.predict(X_test)
 print(y_pred)
