@@ -45,3 +45,5 @@
 
 #### 7. 模型评估
 [模型评估](/code/7-evaluation/evaluation.md)
+
+[模型评估](/code/7-evaluation/demo.ipynb)
