@@ -66,7 +66,7 @@ class MyMultiClassifier:
             print("错误的正则化参数")
 
     def regularised(self):
-        return self.lambda_
+        return self.lambda_ * 0
 
     def l1(self):
         l1 = self.lambda_ * np.sign(self.theta)
