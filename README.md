@@ -47,3 +47,6 @@
 [模型评估](/code/7-evaluation/evaluation.md)
 
 [模型训练示例](/code/7-evaluation/demo.ipynb)
+
+#### 8. 决策树
+[决策树](/code/8-decision%20tree/decisionTree.md)
