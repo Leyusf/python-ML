@@ -1,14 +1,11 @@
 import numpy as np
-import pandas as pd
-from sklearn.linear_model import LinearRegression
-from sklearn.metrics import accuracy_score
-from sklearn.preprocessing import OneHotEncoder, LabelEncoder
-from sklearn.tree import DecisionTreeRegressor, DecisionTreeClassifier
-from DecisionTreeRegressorImp import DecisionTreeRegression
-
 # 1. 数据预处理
 # boston房价预测数据集
 from sklearn.datasets import load_diabetes
+from sklearn.tree import DecisionTreeRegressor
+
+from DecisionTree import DecisionTree
+
 housing_boston = load_diabetes()
 X = housing_boston.data     # data
 Y = housing_boston.target   # label
@@ -16,10 +13,10 @@ Y = housing_boston.target   # label
 from sklearn.model_selection import train_test_split
 
 X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.25, random_state=0)
-tree = DecisionTreeRegressor(max_depth=4, min_samples_split=5)
+tree = DecisionTreeRegressor(min_samples_split=5)
 tree.fit(X_train, Y_train)
 
-myTree = DecisionTreeRegression(max_depth=4, min_samples_leaf=5)
+myTree = DecisionTree(min_samples_split=5, target="regress")
 myTree.fit(X_train, Y_train)
 pred = myTree.predict(X_test)
 
