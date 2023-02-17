@@ -46,7 +46,7 @@ $IG(D, a)=Ent(D)-Ent(D|a)$
 
 信息增益可能对可取值数目较多的属性有所偏好，为了减少这种偏好带来的不利影响，“增益率”被用作选择属性的标准。
 
-$IG\_ratio=(D, a) = {IG(D,a)\over IV(a)}$
+$IG {\_ ratio}=(D, a) = {IG(D,a)\over IV(a)}$
 
 其中，
 
@@ -60,7 +60,7 @@ IV就是信息熵。
 
 基尼纯度： $Gini(D)=\sum_cP(c)P(¬c)=1-\sum_cP(c)^2$
 
-基尼系数： $Gini\_index(D, a)=\sum^V_{v=1}$
+基尼系数： $Gini{\_index}(D, a)=\sum_{v=1}^V\frac{|D^v|}{|D|}Gini(D^v) $
 
 ![](https://pic4.zhimg.com/80/a5f21f511372fea308ab5a2877958e77_720w.webp)
 
