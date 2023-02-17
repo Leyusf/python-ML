@@ -51,4 +51,4 @@
 #### 8. 决策树
 [决策树](/code/8-decision%20tree/decisionTree.md)
 
-[决策树实现那](/code/8-decision%20tree/DecisionTree.py)
+[决策树实现](/code/8-decision%20tree/DecisionTree.py)
