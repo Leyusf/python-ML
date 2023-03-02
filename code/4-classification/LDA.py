@@ -10,7 +10,9 @@ class LDA:
         self.classes = None
 
     def fit(self, X, Y):
+        # 计算协方差
         self.cov = 0
+        # 计算均值
         self.mu = dict()
         self.priorProbs = dict()
         self.classes = np.unique(Y)

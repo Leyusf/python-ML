@@ -10,7 +10,9 @@ class NaiveBayes:
         self.classes = None
 
     def fit(self, X, Y):
+        # 计算标准差
         self.std = dict()
+        # 计算均值
         self.mu = dict()
         self.priorProbs = dict()
         self.classes = np.unique(Y)
@@ -25,8 +27,9 @@ class NaiveBayes:
         for x in X:
             log_posts = list()
             for c in self.classes:
-                # likelihood = (1/(np.sqrt(2*np.pi)*self.std[c])) * np.exp((-(x-self.mu[c])**2)/(2*self.std[c]**2))
+                # 最大似然估计
                 likelihood = (1/(np.sqrt(2*np.pi)*self.std[c])) * np.exp((-(x-self.mu[c])**2)/(2*self.std[c]**2))
+                # 对数后验概率
                 log_posts.append(np.sum(np.log(likelihood)) + np.log(self.priorProbs[c]))
             x_class = self.classes[np.argmax(log_posts)]
             pred.append(x_class)

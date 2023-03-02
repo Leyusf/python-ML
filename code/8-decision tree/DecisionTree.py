@@ -4,7 +4,9 @@ import numpy as np
 # 信息增益
 def gain(y, y_left, y_right):
     # gain选最大的，所以要加负号
-    return - (shannonEntropy(y) - (len(y_left) / len(y) * shannonEntropy(y_left) + len(y_right) / len(y) * shannonEntropy(y_right)))
+    return - (shannonEntropy(y) - (
+                len(y_left) / len(y) * shannonEntropy(y_left) + len(y_right) / len(y) * shannonEntropy(y_right)))
+
 
 # 香农信息熵
 def shannonEntropy(y):
@@ -47,23 +49,35 @@ def split_dataset(X, y, feature_index, threshold):
     return left_X, left_y, right_X, right_y
 
 
-# 计算mse之和
+# 计算sse之和
 def sum_squared_error(y, left_y, right_y):
     left_sse = np.sum(np.square(left_y - np.mean(left_y)))
     right_sse = np.sum(np.square(right_y - np.mean(right_y)))
     return left_sse + right_sse
 
 
+# 分类任务，叶子节点是众数
 def classifier(y):
     counts = np.bincount(y)
     return Node(value=np.argmax(counts))
 
 
+# 回归任务，叶子节点是平均值
 def regressor(y):
     return Node(value=np.mean(y))
 
 
 class DecisionTree:
+    """
+    max_depth: 决策树的最大深度，默认无上限
+    min_samples_split: 决策树的子节点下的最小样本数，默认是2
+    std: 决策树分类标准。
+        分类任务：gini基尼指数、gain信息增益、gain_ratio增益率
+        回归任务：sse残差
+    target: 决策树任务
+        分类: classify
+        回归: regress
+    """
     def __init__(self, max_depth=None, min_samples_split=2, std="gini", target="classify"):
         self.max_depth = np.inf
         if max_depth:
@@ -91,7 +105,6 @@ class DecisionTree:
 
     def assignValue(self):
         pass
-
 
     # 增益率
     def gain_ratio(self, y, y_left, y_right):
