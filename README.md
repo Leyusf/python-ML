@@ -52,3 +52,8 @@
 [决策树](/code/8-decision%20tree/decisionTree.md)
 
 [决策树实现](/code/8-decision%20tree/DecisionTree.py)
+
+#### 9. K-Means
+[K-Means](/code/9-K-Means/K-means.md)
+
+[K-Means实现](/code/9-K-Means/KMeans.py)
