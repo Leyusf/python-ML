@@ -35,8 +35,6 @@ class KMeans:
             newCenters = []
             for cluster in self.clusters:
                 newCenters.append(self.__calCenter(cluster).tolist())
-            # if (np.array(newCenters) == self.centers).all():
-            #     changed = False
             if np.linalg.norm(np.array(newCenters) - self.centers) < self.e:
                 changed = False
             else:
